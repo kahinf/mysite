@@ -1,0 +1,20 @@
+mysql:
+    image: kahinf/mysql:latest
+    container_name: mysql
+    ports:
+        - "3306:3306"
+    environment:
+        MYSQL_ROOT_PASSWORD: 'root'
+        MYSQL_USER: 'root'
+        MYSQL_PASSWORD: 'password'
+        MYSQL_DATABASE: 'testing'
+
+web:
+    build: .
+    container_name: mysite
+    volumes:
+        - .:/app
+    links:
+        - mysql
+    ports:
+        - "8080:80"
